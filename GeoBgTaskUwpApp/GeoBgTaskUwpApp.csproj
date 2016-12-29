@@ -98,7 +98,9 @@
     <Compile Include="Common\FormattedDecimalConverter.cs" />
     <Compile Include="Common\GeoDataSender.cs" />
     <Compile Include="Common\GeoSettings.cs" />
+    <Compile Include="Common\HttpOperationHelper.cs" />
     <Compile Include="Common\LoginHelper.cs" />
+    <Compile Include="Enums\eRequestType.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

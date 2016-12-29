@@ -20,8 +20,20 @@ namespace GeoBgTaskUwpApp
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    public  sealed partial class App : Application
     {
+#if DEBUG
+        //public const string SERVER_URL = "https://dev2.melston.ru/9079/service.aspx";
+        //public const string SERVER_DOCS_URL = "https://dev2.melston.ru/UserSettings/9079/Docs";
+        //public const string SERVER_URL = "http://192.168.0.43/9079/service.aspx";
+        //public const string SERVER_DOCS_URL = "http://192.168.0.43/UserSettings/9079/Docs";
+        public const string SERVER_URL = "https://asuss-dev.melston.ru/9079/service.aspx";
+        public const string SERVER_DOCS_URL = "https://asuss-dev.melston.ru/UserSettings/9079/Docs";
+#else
+        public const string SERVER_URL = "https://asuss-dev.melston.ru/9079/service.aspx";
+        public const string SERVER_DOCS_URL = "https://asuss-dev.melston.ru/UserSettings/9079/Docs";
+#endif
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().

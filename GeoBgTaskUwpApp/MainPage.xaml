@@ -19,11 +19,11 @@
 
                 <!--UserName-->
                 <TextBlock Text="UserID" Foreground="Black" FontSize="30"/>
-                <TextBox  BorderBrush="LightGray" Name="UserName" GotFocus="UserName_GotFocus"/>
+                <TextBox  BorderBrush="LightGray" x:Name="UserName"  GotFocus="UserName_GotFocus"/>
 
                 <!--Password-->
                 <TextBlock  Foreground="Black" Text="Password" Margin="9,-7,0,0" FontSize="30"/>
-                <PasswordBox BorderBrush="LightGray" Name="PassWord" GotFocus="UserName_GotFocus" />
+                <PasswordBox  x:Name="Password" BorderBrush="LightGray"  GotFocus="UserName_GotFocus" />
 
                 <!--Login Button-->
                 <Button Content="Login" Background="#FF30DABB" Name="Login" Click="Login_Click" />

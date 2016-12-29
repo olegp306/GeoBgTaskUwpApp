@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 using Windows.Security.Credentials;
 
 namespace GeoBgTaskUwpApp.Common
@@ -187,6 +188,9 @@ namespace GeoBgTaskUwpApp.Common
         /// <returns></returns>
         public static async Task<bool> SendGeoData(List<GeoData> historyList)
         {
+            Geolocator geo = new Geolocator();
+            //var test = await geo.GetGeopositionAsync();
+            //test.Coordinate.Point.Position
             bool result = false;
             try
             {
@@ -482,7 +486,7 @@ namespace GeoBgTaskUwpApp.Common
             {
                 PasswordCredential result = null;
                 var vault = new PasswordVault();
-                var crs = vault.FindAllByResource("claris");
+                var crs = vault.FindAllByResource("geoclaris");
                 if (crs.Any())
                 {
                     result = crs.First();

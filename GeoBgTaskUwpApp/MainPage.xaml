@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="GeoBgTaskUwpApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GeoBgTaskUwpApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid x:Name="LayoutRoot" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Margin="12,17,0,28">
+                <!--Title-->
+                <TextBlock Text="Login Page" Foreground="Black" FontSize="40"/>
+
+                <!--UserName-->
+                <TextBlock Text="UserID" Foreground="Black" FontSize="30"/>
+                <TextBox  BorderBrush="LightGray" Name="UserName" GotFocus="UserName_GotFocus"/>
+
+                <!--Password-->
+                <TextBlock  Foreground="Black" Text="Password" Margin="9,-7,0,0" FontSize="30"/>
+                <PasswordBox BorderBrush="LightGray" Name="PassWord" GotFocus="UserName_GotFocus" />
+
+                <!--Login Button-->
+                <Button Content="Login" Background="#FF30DABB" Name="Login" Click="Login_Click" />
+
+                <!--  Registration Button-->
+                <!--<Button Content="Registration" Background="#FF30DABB" Name="SignUp" Click="SignUp_Click"/>-->
+
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+</Page>

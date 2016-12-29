@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Windows.ApplicationModel.Background;
@@ -21,6 +22,7 @@ namespace BackgroundTask
             {
                 var details = taskInstance.TriggerDetails as SocketActivityTriggerDetails;
                 var socketInformation = details.SocketInformation;
+                Debug.WriteLine("Запустилась таска");
                 switch (details.Reason)
                 {
                     case SocketActivityTriggerReason.SocketActivity:
@@ -31,7 +33,7 @@ namespace BackgroundTask
                         await writer0.StoreAsync();
                         writer0.DetachStream();
                         writer0.Dispose();
-                        ShowToast("bla bla coordinate");
+                   
                         socket.TransferOwnership(socketInformation.Id);
                         break;
                     case SocketActivityTriggerReason.KeepAliveTimerExpired:
@@ -63,19 +65,12 @@ namespace BackgroundTask
             }
             catch (Exception exception)
             {
-                ShowToast(exception.Message);
+                Debug.WriteLine(exception);
+              
                 deferral.Complete();
             }
         }
 
-        public void ShowToast(string text)
-        {
-            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
-            var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
-            var textNodes = toastXml.GetElementsByTagName("text");
-            textNodes.First().AppendChild(toastXml.CreateTextNode(text));
-            var toastNotification = new ToastNotification(toastXml);
-            toastNotifier.Show(new ToastNotification(toastXml));
-        }
+     
     }
 }

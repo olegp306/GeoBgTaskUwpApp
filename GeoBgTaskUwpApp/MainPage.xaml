@@ -15,8 +15,8 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Margin="12,17,0,28">
                 <!--Title-->
-                <TextBlock Text="МЕЛСТОН" Foreground="Black" FontSize="40"/>
-                <TextBlock Text="Фоновое приложение" Foreground="Black" FontSize="30"/>
+                <TextBlock Text="МЕЛСТОН" Foreground="Black" FontSize="40" HorizontalAlignment="Center"/>
+                <TextBlock Text="(фоновое приложение)" Foreground="Black" FontSize="20" HorizontalAlignment="Center"/>
                 <!--UserName-->
                 <TextBlock Text="Имя пользователя" Foreground="Black" FontSize="30"/>
                 <TextBox  BorderBrush="LightGray" x:Name="UserName"  GotFocus="UserName_GotFocus"/>
@@ -26,7 +26,7 @@
                 <PasswordBox  x:Name="Password" BorderBrush="LightGray"  GotFocus="UserName_GotFocus" />
 
                 <!--Login Button-->
-                <Button Content="Войти" Background="#FF30DABB" Name="Login" Click="Login_Click" />
+                <Button Content="Войти" FontSize="30" Name="Login" Click="Login_Click"  Background="Gray" MinHeight="80" MinWidth="150" HorizontalAlignment="Center" />
 
                 <!--  Registration Button-->
                 <!--<Button Content="Registration" Background="#FF30DABB" Name="SignUp" Click="SignUp_Click"/>-->

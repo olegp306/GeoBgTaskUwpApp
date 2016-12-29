@@ -8,30 +8,36 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid x:Name="LayoutRoot" Background="White">
+        <Grid x:Name="LayoutRoot" Background="White" Margin="12,17,0,28">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Margin="12,17,0,28">
-                <!--Title-->
-                <TextBlock Text="МЕЛСТОН" Foreground="Black" FontSize="40" HorizontalAlignment="Center"/>
-                <TextBlock Text="(фоновое приложение)" Foreground="Black" FontSize="20" HorizontalAlignment="Center"/>
-                <!--UserName-->
-                <TextBlock Text="Имя пользователя" Foreground="Black" FontSize="30"/>
-                <TextBox  BorderBrush="LightGray" x:Name="UserName"  GotFocus="UserName_GotFocus"/>
 
-                <!--Password-->
-                <TextBlock  Foreground="Black" Text="Пароль" Margin="9,-7,0,0" FontSize="30"/>
-                <PasswordBox  x:Name="Password" BorderBrush="LightGray"  GotFocus="UserName_GotFocus" />
+            <!--Title-->
+            <TextBlock Grid.Row="0" Text="МЕЛСТОН" Foreground="Black" FontSize="40" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Text="(фоновое приложение)" Foreground="Black" FontSize="20" HorizontalAlignment="Center"/>
+            <!--UserName-->
+            <TextBlock Grid.Row="2" Text="Имя пользователя" Foreground="Black" FontSize="30"/>
+            <TextBox Grid.Row="3" BorderBrush="LightGray" x:Name="UserName" />
 
-                <!--Login Button-->
-                <Button Content="Войти" FontSize="30" Name="Login" Click="Login_Click"  Background="Gray" MinHeight="80" MinWidth="150" HorizontalAlignment="Center" />
+            <!--Password-->
+            <TextBlock Grid.Row="4" Foreground="Black" Text="Пароль" Margin="9,-7,0,0" FontSize="30"/>
+            <PasswordBox Grid.Row="5" x:Name="Password" BorderBrush="LightGray" />
 
-                <!--  Registration Button-->
-                <!--<Button Content="Registration" Background="#FF30DABB" Name="SignUp" Click="SignUp_Click"/>-->
+            <!--Login Button-->
+            <Button Grid.Row="6" Content="Войти" FontSize="30" Name="Login" Click="Login_Click"  Background="Gray" MinHeight="80" MinWidth="150" HorizontalAlignment="Center" />
 
-            </StackPanel>
+            <ListView Grid.Row="7" x:Name="LogListView" Margin="20" Background="Wheat" />
+            <!--  Registration Button-->
+            <!--<Button Content="Registration" Background="#FF30DABB" Name="SignUp" Click="SignUp_Click"/>-->
+
 
         </Grid>
 

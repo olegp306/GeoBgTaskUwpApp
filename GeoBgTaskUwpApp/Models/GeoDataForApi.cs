@@ -60,6 +60,5 @@ namespace GeoBgTaskUwpApp.Models
         public int DistanceMeters { get; set; }
     }
 
-    //еуые2
-    //еуые2
+  
 }

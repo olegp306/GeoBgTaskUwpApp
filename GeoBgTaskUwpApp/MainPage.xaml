@@ -34,7 +34,7 @@
             <!--Login Button-->
             <Button Grid.Row="6" Content="Войти" FontSize="30" Name="Login" Click="Login_Click"  Background="Gray" MinHeight="80" MinWidth="150" HorizontalAlignment="Center" />
 
-            <ListView Grid.Row="7" x:Name="LogListView" Margin="20" Background="Wheat" />
+            <ListView Grid.Row="7" x:Name="LogListView" Margin="20" Background="Wheat" Visibility="Collapsed" />
             <!--  Registration Button-->
             <!--<Button Content="Registration" Background="#FF30DABB" Name="SignUp" Click="SignUp_Click"/>-->
 

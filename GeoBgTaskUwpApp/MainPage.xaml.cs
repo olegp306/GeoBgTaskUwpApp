@@ -282,7 +282,7 @@ namespace GeoBgTaskUwpApp
                 {
                     socket = new StreamSocket();
                     socket.EnableTransferOwnership(task.TaskId, SocketActivityConnectedStandbyAction.Wake);
-                    var targetServer = new HostName("192.168.0.43");
+                    var targetServer = new HostName("62.128.104.89");
                     await socket.ConnectAsync(targetServer, port);
                     // To demonstrate usage of CancelIOAsync async, have a pending read on the socket and call 
                     // cancel before transfering the socket. 

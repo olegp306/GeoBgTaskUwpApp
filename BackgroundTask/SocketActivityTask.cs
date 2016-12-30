@@ -1,8 +1,12 @@
-﻿using System;
+﻿using GeoBgTaskUwpApp.Common;
+using GeoBgTaskUwpApp.Models;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Windows.ApplicationModel.Background;
+using Windows.Devices.Geolocation;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage;
@@ -28,12 +32,15 @@ namespace BackgroundTask
                     case SocketActivityTriggerReason.SocketActivity:
                         var socket = socketInformation.StreamSocket;
 
-                        DataWriter writer0 = new DataWriter(socket.OutputStream);
-                        writer0.WriteBytes(Encoding.UTF8.GetBytes("bla bla coordinate"));
-                        await writer0.StoreAsync();
-                        writer0.DetachStream();
-                        writer0.Dispose();
-                   
+                        Geolocator locator = new Geolocator();
+                        var coordinate = await locator.GetGeopositionAsync();
+                        BasicGeoposition snPosition = new BasicGeoposition() { Latitude = coordinate.Coordinate.Point.Position.Latitude, Longitude = coordinate.Coordinate.Point.Position.Longitude };
+                        Geopoint snPoint = new Geopoint(snPosition);
+                        var g = new GeoData() { DateTime = DateTime.Now, Guid = Guid.NewGuid().ToString(), ObjectGuid = new Guid("166F946A-5D1B-4CB3-BDEE-234DC677B593").ToString(), DepartmentGuid = new Guid("e054e33f-a3bc-4c67-a5e8-791f6c910140").ToString() };
+                        await GeoDataSender.SendGeoData(new List<GeoData>() { g });
+
+                        ShowToast("Получен запрос координат от сервера. Данные успешно отправлены.");
+
                         socket.TransferOwnership(socketInformation.Id);
                         break;
                     case SocketActivityTriggerReason.KeepAliveTimerExpired:
@@ -66,11 +73,20 @@ namespace BackgroundTask
             catch (Exception exception)
             {
                 Debug.WriteLine(exception);
-              
                 deferral.Complete();
             }
         }
 
-     
+
+        public void ShowToast(string text)
+        {
+            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
+            var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            var textNodes = toastXml.GetElementsByTagName("text");
+            textNodes.First().AppendChild(toastXml.CreateTextNode(text));
+            var toastNotification = new ToastNotification(toastXml);
+            toastNotifier.Show(new ToastNotification(toastXml));
+        }
+
     }
 }

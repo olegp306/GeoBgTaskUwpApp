@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Security.Credentials;
+using Windows.Storage;
 
 namespace GeoBgTaskUwpApp.Common
 {
@@ -469,7 +470,7 @@ namespace GeoBgTaskUwpApp.Common
                     result.Points.Add(point);
                 }
                 //result.UserGuid = app.CurrentSession.EmployeeGuid.ToString();
-                result.UserGuid = Guid.Empty.ToString();
+                result.UserGuid = ApplicationData.Current.LocalSettings.Values["EmployeeGuid"].ToString();
             }
             return result;
         }

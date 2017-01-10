@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.Storage;
 
 namespace GeoBgTaskUwpApp.Common
 {
@@ -30,6 +31,7 @@ namespace GeoBgTaskUwpApp.Common
                     var dataProto = new { sessionId = Guid.Empty, loginGuid = Guid.Empty, employeeGuid = Guid.Empty, employeeName = string.Empty, employeePhone = string.Empty, employeeAuto = string.Empty, timezone = 0, serverDateTime = DateTimeOffset.MinValue, admin = false, nfcMaster = false, geoTracking = false };
                     var data = JsonConvert.DeserializeAnonymousType(recievedContent, dataProto);
 
+                    ApplicationData.Current.LocalSettings.Values["EmployeeGuid"] = data.employeeGuid;
                     return true;
                 }
                 catch (Exception e0)

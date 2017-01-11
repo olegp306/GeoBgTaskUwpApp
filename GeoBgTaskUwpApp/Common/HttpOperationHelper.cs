@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
+﻿using GeoBgTaskUwpApp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
 using Windows.Storage;
 
 namespace GeoBgTaskUwpApp.Common
 {
     public class HttpOperationHelper
     {
-        public static async Task<bool> AuthRequest(string login, string password)
+        public static async Task<SessionModel> AuthRequest(string login, string password)
         {
             var uri = string.Format("{0}?action=login", App.SERVER_URL);
             var version = "99";// Package.Current.Id.Version.Major.ToString();
@@ -28,11 +28,9 @@ namespace GeoBgTaskUwpApp.Common
             {
                 try
                 {
-                    var dataProto = new { sessionId = Guid.Empty, loginGuid = Guid.Empty, employeeGuid = Guid.Empty, employeeName = string.Empty, employeePhone = string.Empty, employeeAuto = string.Empty, timezone = 0, serverDateTime = DateTimeOffset.MinValue, admin = false, nfcMaster = false, geoTracking = false };
-                    var data = JsonConvert.DeserializeAnonymousType(recievedContent, dataProto);
-
+                    var data = JsonConvert.DeserializeObject<SessionModel>(recievedContent);
                     ApplicationData.Current.LocalSettings.Values["EmployeeGuid"] = data.employeeGuid;
-                    return true;
+                    return data;
                 }
                 catch (Exception e0)
                 {

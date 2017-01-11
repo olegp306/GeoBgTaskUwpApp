@@ -99,94 +99,29 @@ namespace GeoBgTaskUwpApp
 
         private async void Login_Click(object sender, RoutedEventArgs e)
         {
-
-            //if (App.USE_TEST_DATASET)
-            //{
-            //    Frame.Navigate(typeof(MainPage));
-            //    return;
-            //}
-
-            //var statusBar = StatusBar.GetForCurrentView();
             try
             {
                 SetStateOfControls(false);
-                //Аутентификация
-                //statusBar.ProgressIndicator.Text = "Вход пользователя...";
-                //await statusBar.ProgressIndicator.ShowAsync();
-
-                var session = await HttpOperationHelper.AuthRequest(UserName.Text, Password.Password);
-
-
-//#if !DEBUG
-//                //Проверка времени на телефоне.
-//                if ((App.Current as App).ConnectionState == eConnectionState.ONLINE)
-//                {
-//                    var expectedTime = session.ServerDateTime.ToUniversalTime();
-//                    var expectedOffset = session.ServerDateTime.Offset.Hours + session.Timezone;
-//                    var currentTime = DateTimeOffset.Now.ToUniversalTime();
-//                    var currentOffset = DateTimeOffset.Now.Offset.Hours;
-//                    var diff = Math.Abs((currentTime - expectedTime).TotalMinutes);
-
-//                    if (diff > 5.0 || expectedOffset != currentOffset)
-//                    {
-//                        await statusBar.ProgressIndicator.HideAsync();
-//                        SetStateOfControls(true);
-//                        var region = session.Timezone == 0 ? string.Empty : $" (МСК+{ session.Timezone }ч.)";
-//                        var curregion = $" (МСК+{ DateTimeOffset.Now.Offset.Hours - 3 }ч.)";
-//                        //var message = $"На телефоне установлена некорректная дата или время. Ожидаемые дата и время для вашего региона{ region } { session.ServerDateTime.AddHours(session.Timezone).ToString("dd MMM yyyy HH:mm") }. Текущее время{ curregion } { DateTimeOffset.Now.ToString("dd MMM yyyy HH:mm") }. Измененные дата и время вступят в силу только после перезапуска приложения.";
-//                        var message = $"На телефоне установлена некорректная дата и время. Установите корректный часовой пояс (UTC+{ expectedOffset }) и корректное время { session.ServerDateTime.AddHours(session.Timezone).ToString("dd MMM yyyy HH:mm") }.";
-//                        LoggingHelper.Log(message, new { Employee = session.EmployeeName, ExpectedTime = expectedTime, ExpectedOffset = expectedOffset, CurrentTime = currentTime, CurrentOffset = currentOffset, Diff = diff });
-//                        await new MessageDialog(message, "Внимание").ShowAsync();
-//                        return;
-//                    }
-//                }
-//#endif
-
-                //await NotificationHelper.Init(session.UserGuid);
-                //(App.Current as App).CurrentSession = session;
-                //GeoSettings.SendGeoDataSetting = session.IsGeoTrackingOn;
-
-
-
+                var session = await HttpOperationHelper.AuthRequest(UserNameTextBox.Text, PasswordTextBox.Password);
                 RememberMe();
 
-                //await statusBar.ProgressIndicator.HideAsync();
-                //Иниц-я Init Core
-                //if (GeoSettings.SendGeoDataSetting)
-                //{
-                //    if (!(await LumiaMotionHelper.InitCore()))
-                //    {
-                //        SetStateOfControls(true);
-                //        return;
-                //    }
-                //}
+                UserNameTextBlock.Visibility = Visibility.Collapsed;
+                UserNameTextBox.Visibility = Visibility.Collapsed;
+                PasswordTextBlock.Visibility = Visibility.Collapsed;
+                PasswordTextBox.Visibility = Visibility.Collapsed;
+                LoginButton.Visibility = Visibility.Collapsed;
 
-                //Синхронизация
-                //var db = new AsyncDBHelper();
-                //await db.InsertAsync(session);
+                LogListView.Visibility = Visibility.Visible;
 
-                //var res = await db.Synchronize(true);
-                //if (res != eSynchronizationResult.SUCCES)
-                //{
-                //    //Проверим, есть ли заявки у пользователя уже. Если есть переходим в оффлайн, если нет - выводим сообщение 
-                //    var r = await db.Table<RequestViewModel>().ToListAsync();
-                //    if (!r.Any())
-                //    {
-                //        if (res == eSynchronizationResult.NETWORK_ERROR)
-                //            throw new HttpRequestException();
+                var log = new List<string>();
 
-                //        if (res == eSynchronizationResult.FAILURE)
-                //            throw new Exception();
-                //    }
-                //}
+                log.Add($"Вы вошли в приложение как {session.employeeName}");
+                log.Add($"Определение координат успешно запущено");
+                log.Add($"Каждый раз, когда сервер будет запрашивать координаты, будет информационное сообщение. Приложение можно закрыть.");
 
-                //(App.Current as App).SynchronizationTask.Start();
-
-                //if (GeoSettings.SendGeoDataSetting)
-                //    (App.Current as App).GeoSynchronizationTask.Start();
+                LogListView.ItemsSource = log;
 
 
-                // Jump();
                 await InitTask();
             }
             catch (HttpRequestException e0)
@@ -235,7 +170,7 @@ namespace GeoBgTaskUwpApp
             }
             catch { }
 
-            vault.Add(new PasswordCredential("geoclaris", UserName.Text, Password.Password));
+            vault.Add(new PasswordCredential("geoclaris", UserNameTextBox.Text, PasswordTextBox.Password));
         }
 
         /// <summary>
@@ -250,9 +185,9 @@ namespace GeoBgTaskUwpApp
                 if (crs.Any())
                 {
                     var cr = crs.First();
-                    UserName.Text = cr.UserName;
+                    UserNameTextBox.Text = cr.UserName;
                     cr.RetrievePassword();
-                    Password.Password = cr.Password;
+                    PasswordTextBox.Password = cr.Password;
                 }
             }
             catch { }
@@ -264,7 +199,7 @@ namespace GeoBgTaskUwpApp
         /// </summary>
         private void SetStateOfControls(bool isEnabled)
         {
-            UserName.IsEnabled = Password.IsEnabled = Login.IsEnabled = isEnabled;
+            UserNameTextBox.IsEnabled = PasswordTextBox.IsEnabled = LoginButton.IsEnabled = isEnabled;
         }
 
 

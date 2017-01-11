@@ -21,20 +21,26 @@
             </Grid.RowDefinitions>
 
             <!--Title-->
-            <TextBlock Grid.Row="0" Text="МЕЛСТОН" Foreground="Black" FontSize="40" HorizontalAlignment="Center"/>
-            <TextBlock Grid.Row="1" Text="(фоновое приложение)" Foreground="Black" FontSize="20" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="0" Text="МЕЛСТОН" Foreground="Black" FontSize="40" HorizontalAlignment="Center" Margin="5"/>
+            <TextBlock Grid.Row="1" Text="(фоновое приложение)" Foreground="Black" FontSize="20" HorizontalAlignment="Center" Margin="5"/>
             <!--UserName-->
-            <TextBlock Grid.Row="2" Text="Имя пользователя" Foreground="Black" FontSize="30"/>
-            <TextBox Grid.Row="3" BorderBrush="LightGray" x:Name="UserName" />
+            <TextBlock x:Name="UserNameTextBlock" Grid.Row="2" Text="Имя пользователя" Foreground="Black" FontSize="30" Margin="5"/>
+            <TextBox Grid.Row="3" BorderBrush="LightGray" x:Name="UserNameTextBox" Margin="5"/>
 
             <!--Password-->
-            <TextBlock Grid.Row="4" Foreground="Black" Text="Пароль" Margin="9,-7,0,0" FontSize="30"/>
-            <PasswordBox Grid.Row="5" x:Name="Password" BorderBrush="LightGray" />
+            <TextBlock x:Name="PasswordTextBlock" Grid.Row="4" Foreground="Black" Text="Пароль" Margin="9,-7,0,0" FontSize="30" />
+            <PasswordBox Grid.Row="5" x:Name="PasswordTextBox" BorderBrush="LightGray" Margin="5"/>
 
             <!--Login Button-->
-            <Button Grid.Row="6" Content="Войти" FontSize="30" Name="Login" Click="Login_Click"  Background="Gray" MinHeight="80" MinWidth="150" HorizontalAlignment="Center" />
+            <Button Grid.Row="6" Content="Войти" FontSize="30" x:Name="LoginButton" Click="Login_Click"  Background="Gray" MinHeight="60" MinWidth="150" HorizontalAlignment="Center" />
 
-            <ListView Grid.Row="7" x:Name="LogListView" Margin="20" Background="Wheat" Visibility="Collapsed" />
+            <ListView Grid.Row="2" Grid.RowSpan="7" x:Name="LogListView" Margin="2" Background="Silver" Visibility="Collapsed">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <!--  Registration Button-->
             <!--<Button Content="Registration" Background="#FF30DABB" Name="SignUp" Click="SignUp_Click"/>-->
 

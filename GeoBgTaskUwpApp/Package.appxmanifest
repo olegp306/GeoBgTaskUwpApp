@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="54822altsoft.RT" Publisher="CN=Панюков ОВ" Version="48.0.1.0" />
+  <Identity Name="54822altsoft.RT" Publisher="CN=13A12E21-957B-4DF6-B7D6-F172FBD0D98D" Version="48.0.2.0" />
   <mp:PhoneIdentity PhoneProductId="af54b988-90eb-4b25-b085-1c5fbee6efc9" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>АСУ СС Мелстон RT</DisplayName>
